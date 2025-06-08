@@ -391,7 +391,7 @@ public class Estudiante
      */
     public String metodo1( )
     {
-        return "Respuesta 1";
+    	return "sueldo del estudiante si fuera monitor: $" + darSueldoFormateado();
     }
 
     /**
