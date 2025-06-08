@@ -12,6 +12,8 @@ package uniandes.cupi2.estudiante.mundo;
 
 import uniandes.cupi2.estudiante.mundo.Curso.Departamento;
 
+import java.text.DecimalFormat;
+
 /**
  * Estudiante que tiene 4 cursos.
  */
@@ -98,7 +100,7 @@ public class Estudiante
         curso2 = new Curso( "MATE1203", "Cálculo diferencial", 3, Departamento.MATEMATICAS );
         curso3 = new Curso( "FISI1100", "Física 1", 4, Departamento.FISICA );
         curso4 = new Curso( "BIOL1405", "Biología celular", 4, Departamento.BIOLOGIA );
-        semestre = 1;
+        semestre = 2;
     }
 
     // -----------------------------------------------------------------
@@ -215,6 +217,16 @@ public class Estudiante
 
         return promedio;
     }
+    
+    public String formatearPromedio(double pPromedio) {
+        String promedioStr = String.valueOf(pPromedio);
+        if (promedioStr.length() > 2) {
+            return promedioStr.substring(0, 3);
+        } else {
+            return promedioStr;
+        }
+    }
+     
 
     /**
      * Indica si el estudiante se encuentra en prueba académica.
@@ -335,6 +347,39 @@ public class Estudiante
         }
         return asigno;
     }
+    
+    
+    /**
+     * calcula el sueldo que tendría el estudiante si fuera monitor, en función de su promedio y del semestre en el que va
+     * @param pPromedio Promedio del estudiante.
+     * @param pSemestre Semestre del estudiante.
+ 	* @return Sueldo calculado. Si algún valor es 0, retorna 0.0.
+  	*/
+     
+     public double calcularSueldo(double pPromedio, int pSemestre) {
+         if (pSemestre == 0) {
+             return 0.0;
+         }
+
+         if (pSemestre >= 1 && pSemestre <= 3) {
+             return pPromedio >= 4.0 ? 25000.00 : 15000.00;
+         } else if (pSemestre >= 4 && pSemestre <= 7) {
+             return pPromedio >= 4.5 ? 35000.00 : 25000.00;
+         } else if (pSemestre >= 8) {
+             return 50000.00;
+         }
+
+         return 0.0; // Por si acaso no entra en ningún rango
+     }
+
+     
+     public String darSueldoFormateado() {
+         double promedio = calcularPromedioEstudiante();
+         double sueldo = calcularSueldo(promedio, semestre);
+
+         DecimalFormat formatter = new DecimalFormat("#,###.00");
+         return formatter.format(sueldo);
+     }
 
     // -----------------------------------------------------------------
     // Puntos de Extensión
