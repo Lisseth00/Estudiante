@@ -121,7 +121,7 @@ public class InterfazEstudiante extends JFrame
         add( panelOpciones, BorderLayout.SOUTH );
 
         setLocationRelativeTo( null );
-        setResizable( false );
+        setResizable( true );
 
         actualizar( );
     }
