@@ -380,6 +380,25 @@ public class Estudiante
          DecimalFormat formatter = new DecimalFormat("#,###.00");
          return formatter.format(sueldo);
      }
+     
+     public double darMejorNota() {
+         double mejor = -1.0;
+
+         if (curso1.estaCalificado()) {
+             mejor = curso1.darNota();
+         }
+         if (curso2.estaCalificado() && curso2.darNota() > mejor) {
+             mejor = curso2.darNota();
+         }
+         if (curso3.estaCalificado() && curso3.darNota() > mejor) {
+             mejor = curso3.darNota();
+         }
+         if (curso4.estaCalificado() && curso4.darNota() > mejor) {
+             mejor = curso4.darNota();
+         }
+
+         return mejor;
+     }
 
     // -----------------------------------------------------------------
     // Puntos de Extensión
@@ -391,7 +410,7 @@ public class Estudiante
      */
     public String metodo1( )
     {
-    	return "sueldo del estudiante si fuera monitor: $" + darSueldoFormateado();
+    	return "El sueldo del estudiante si fuera monitor: $" + darSueldoFormateado();
     }
 
     /**
@@ -400,6 +419,6 @@ public class Estudiante
      */
     public String metodo2( )
     {
-        return "Respuesta 2";
+        return "La mejor nota del estudiante es: " + darMejorNota();
     }
 }
